@@ -4,13 +4,16 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 const Baixo = () => {
   const [dados, setDados] = useState([]);
   const [mostrarDados, setMostrarDados] = useState(false);
+  const [dadosPrimeiroItem, setDadosPrimeiroItem] = useState({});
 
   useEffect(() => {
-    fetch('http://localhost:21263')
+    fetch('https://marvinserver.onrender.com/')
       .then(response => response.json())
       .then(data => {
-        console.log(data)
         setDados(data);
+        if (data.length > 0) {
+          setDadosPrimeiroItem(data[0]);
+        }
       })
       .catch(error => {
         console.log(error);
@@ -33,7 +36,7 @@ const Baixo = () => {
 
       {mostrarDados && (
         <Text style={styles.dado}>
-          {JSON.stringify(dados[0])}
+          {JSON.stringify(dadosPrimeiroItem[1])}
         </Text>
       )}
     </View>
